@@ -1,0 +1,29 @@
+.containerNota{
+    background-color: bisque;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+
+.containerNota-Quitar{
+    padding-right: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.containerNota-Quitar:hover{
+    font-size: 25px;
+    color: red;
+    cursor: pointer;
+}
+
+.containerNota-Cambio{
+    font-size: 30px;
+}
+
+.containerNota-Cambio:hover{
+    font-size: 35px;
+    cursor: pointer;
+}
