@@ -8,6 +8,7 @@ import { NotasEmpty } from "./components/NotasEmpty";
 import { uselocalStorage } from "./helpers/useLocalStorage";
 import { useAgregarItem } from "./helpers/useAgregarItem";
 import { useEffect, useState } from "react";
+import { useEditarItem } from "./helpers/useEditarItem";
 
 export const App = () => {
 
@@ -28,15 +29,8 @@ export const App = () => {
     });
 
     const [agregarNota] = useAgregarItem(notas, guardarNotas)
-    
-    const editar = (text, newText) =>{
-        const newNotas = notas.map(n =>{
-            if(n.text === text) return {...n, text: newText}
-            return n
-        })
-        guardarNotas(newNotas)
-        setEditNota(null)
-    }
+
+    const [editar] = useEditarItem(notas, setEditNota, guardarNotas)
 
     const quitarNota = (text) => {
         const newNotas = notas.filter(n => n.text !== text);
