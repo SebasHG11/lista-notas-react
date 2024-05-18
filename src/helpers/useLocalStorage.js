@@ -2,14 +2,15 @@ import { useEffect } from "react";
 
 export const uselocalStorage = (nombreLocal, parsedItem, setItem, setCargando) =>{
 
-        const localStorageItems = localStorage.getItem(nombreLocal);
-        try {
-            parsedItem = JSON.parse(localStorageItems) || [];
-        } catch (e) {
-            parsedItem = [];
-        }
-
         useEffect(() => {
+
+            const localStorageItems = localStorage.getItem(nombreLocal);
+            try {
+                parsedItem = JSON.parse(localStorageItems) || [];
+            } catch (e) {
+                parsedItem = [];
+            }
+
             setTimeout(() => {
                 if (!localStorageItems) {
                     localStorage.setItem(nombreLocal, '[]');
