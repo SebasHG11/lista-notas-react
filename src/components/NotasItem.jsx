@@ -16,8 +16,8 @@ export const NotasItem = ({ text , date, like, quitarNota, cambioAnimo, useEdita
         onClick={cambioAnimo}
         >
           {like ?
-          '😂' :
-          '😒'
+          '👍' :
+          '👎'
           }
         </span>
         <button

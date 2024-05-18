@@ -7,6 +7,7 @@ export const NotasForm = ({agregarNota}) => {
   const onSubmit = (event) =>{
     event.preventDefault()
     agregarNota(newNota)
+    setNewNota('')
   }
 
   return (
