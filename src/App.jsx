@@ -4,11 +4,13 @@ import { NotasItem } from "./components/NotasItem";
 import { NotasForm } from "./components/NotasForm";
 import { NotasCargando } from "./components/NotasCargando";
 import { NotaEdit } from "./components/NotaEdit";
+import { NotasEmpty } from "./components/NotasEmpty";
 import { useEffect, useState } from "react";
 
 export const App = () => {
 
     const [cargando, setCargando] = useState(true);
+    const [empty, setEmpty] = useState(false)
     const [editNota, setEditNota] = useState(null);
 
     const editar = (text, newText) =>{
@@ -81,6 +83,16 @@ export const App = () => {
         guardarNotas(newNotas);
     };
 
+
+    useEffect(()=>{
+        if(notas.length === 0){
+        setEmpty(true)
+    }else{
+        setEmpty(false)
+    }
+    },[notas])
+    
+
     return (
         <div className="container">
             <h1>Lista de Notas</h1>
@@ -116,6 +128,11 @@ export const App = () => {
                     <NotasCargando />
                 }
             </NotasList>
+
+            {empty === true &&
+            <NotasEmpty />
+            }
+
             <NotasForm
                 agregarNota={agregarNota}
             />
