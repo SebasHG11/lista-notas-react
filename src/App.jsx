@@ -9,6 +9,7 @@ import { uselocalStorage } from "./helpers/useLocalStorage";
 import { useAgregarItem } from "./helpers/useAgregarItem";
 import { useEffect, useState } from "react";
 import { useEditarItem } from "./helpers/useEditarItem";
+import { useCambioAnimo } from "./helpers/useCambioAnimo";
 
 export const App = () => {
 
@@ -37,13 +38,7 @@ export const App = () => {
         guardarNotas(newNotas);
     };
 
-    const cambioAnimo = (text) => {
-        const newNotas = notas.map((nota) => {
-            if (nota.text === text) return { ...nota, like: !nota.like };
-            return nota;
-        });
-        guardarNotas(newNotas);
-    };
+    const [cambioAnimo] = useCambioAnimo(notas, guardarNotas)
 
     useEffect(()=>{
         if(notas.length === 0){
