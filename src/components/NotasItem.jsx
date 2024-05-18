@@ -1,6 +1,7 @@
 import "../styles/NotasItem.css"
 
-export const NotasItem = ({ text , date, like, quitarNota, cambioAnimo }) => {
+export const NotasItem = ({ text , date, like, quitarNota, cambioAnimo, useEditar }) => {
+
   return (
     <div className="containerNota">
         <span
@@ -19,6 +20,11 @@ export const NotasItem = ({ text , date, like, quitarNota, cambioAnimo }) => {
           '😒'
           }
         </span>
+        <button
+        className="btn btn-primary"
+        onClick={useEditar}>
+          Editar
+        </button>
     </div>
   )
 }
