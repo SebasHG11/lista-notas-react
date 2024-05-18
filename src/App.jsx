@@ -5,6 +5,7 @@ import { NotasForm } from "./components/NotasForm";
 import { NotasCargando } from "./components/NotasCargando";
 import { NotaEdit } from "./components/NotaEdit";
 import { NotasEmpty } from "./components/NotasEmpty";
+import { uselocalStorage } from "./helpers/useLocalStorage";
 import { useEffect, useState } from "react";
 
 export const App = () => {
@@ -22,38 +23,12 @@ export const App = () => {
         setEditNota(null)
     }
 
-    const localStorageNotas = localStorage.getItem('NOTAS');
-    let parsedNotas = [];
-    try {
-        parsedNotas = JSON.parse(localStorageNotas) || [];
-    } catch (e) {
-        parsedNotas = [];
-    }
+    let valorInicial = []
 
-    const [notas, setNotas] = useState(parsedNotas);
+    const [notas, setNotas] = useState(valorInicial);
     const [busca, setBusca] = useState('');
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (!localStorageNotas) {
-                localStorage.setItem('NOTAS', '[]');
-                parsedNotas = [];
-            } else {
-                try {
-                    parsedNotas = JSON.parse(localStorageNotas) || [];
-                } catch (e) {
-                    parsedNotas = [];
-                }
-            }
-            setNotas(parsedNotas);
-            setCargando(false);
-        }, 3000);
-    }, []);
-
-    const guardarNotas = (newNotas) => {
-        localStorage.setItem('NOTAS', JSON.stringify(newNotas));
-        setNotas(newNotas);
-    };
+    const [parsedNotas, guardarNotas] = uselocalStorage('NOTAS', valorInicial, setNotas, setCargando)
 
     const notasBuscadas = notas.filter(n => {
         return (n.text) && n.text.toLowerCase().includes(busca.toLowerCase());
@@ -129,7 +104,7 @@ export const App = () => {
                 }
             </NotasList>
 
-            {empty === true &&
+            {(empty && !cargando) &&
             <NotasEmpty />
             }
 
