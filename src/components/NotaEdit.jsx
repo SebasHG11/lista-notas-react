@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { createPortal } from "react-dom"
+import "../styles/NotasEdit.css" 
 
 export const NotaEdit = ({text, editNota, setEditNota, editar}) =>{
 
@@ -20,8 +21,11 @@ export const NotaEdit = ({text, editNota, setEditNota, editar}) =>{
     }
 
     return createPortal(
-        <div className="container">
-            <form onSubmit={onSubmit}>
+        <div className="portal">
+            <form
+            className="formNotaEdit" 
+            onSubmit={onSubmit}
+            >
                 <textarea
                 value={newText}
                 onChange={onChange} 
