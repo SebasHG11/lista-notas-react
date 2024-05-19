@@ -10,12 +10,14 @@ import { useAgregarItem } from "./helpers/useAgregarItem";
 import { useEffect, useState } from "react";
 import { useEditarItem } from "./helpers/useEditarItem";
 import { useCambioAnimo } from "./helpers/useCambioAnimo";
+import { NotasCreate } from "./components/NotasCreate";
 
 export const App = () => {
 
     const [cargando, setCargando] = useState(true);
     const [empty, setEmpty] = useState(false)
     const [editNota, setEditNota] = useState(null);
+    const [openModal, setOpenModal] = useState(false)
 
     
     let valorInicial = []
@@ -47,6 +49,11 @@ export const App = () => {
         setEmpty(false)
     }
     },[notas])
+
+    const ActivarModal = (event) =>{
+        event.preventDefault()
+        setOpenModal(true)
+    }
     
 
     return (
@@ -55,6 +62,12 @@ export const App = () => {
             <NotasSearch
                 busca={busca}
                 setBusca={setBusca} />
+
+            <button
+            onClick={ActivarModal}
+            className="btn btn-primary"
+            >Agregar Nota</button>
+
             <NotasList>
                 {!cargando ? notasBuscadas.map(nota => (
                     <div key={nota.text}>
@@ -88,10 +101,18 @@ export const App = () => {
             {(empty && !cargando) &&
             <NotasEmpty />
             }
+            {openModal &&
+            <NotasCreate>
 
             <NotasForm
-                agregarNota={agregarNota}
+            agregarNota={agregarNota}
+            setOpenModal={setOpenModal}
             />
+
+            </NotasCreate>
+
+            }
+            
         </div>
     )
 };

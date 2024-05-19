@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const NotasForm = ({agregarNota}) => {
+export const NotasForm = ({agregarNota, setOpenModal}) => {
 
   const [newNota, setNewNota] = useState('')
 
@@ -8,6 +8,12 @@ export const NotasForm = ({agregarNota}) => {
     event.preventDefault()
     agregarNota(newNota)
     setNewNota('')
+    setOpenModal(false)
+  }
+
+  const onCancelar = (event) =>{
+    event.preventDefault()
+    setOpenModal(false)
   }
 
   return (
@@ -25,6 +31,10 @@ export const NotasForm = ({agregarNota}) => {
             }}
             ></textarea>
             <button type="submit" className="btn btn-primary">Agregar</button>
+            <button
+            className="btn btn-danger"
+            onClick={onCancelar}
+            >Cancelar</button>
             </div>
         </form>
     </>
