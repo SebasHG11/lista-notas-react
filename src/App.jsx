@@ -24,6 +24,8 @@ export const App = () => {
     
     const [notas, setNotas] = useState(valorInicial);
     const [busca, setBusca] = useState('');
+
+    const notasTotal = notas.length
     
     const [parsedNotas, guardarNotas] = uselocalStorage('NOTAS', valorInicial, setNotas, setCargando)
     
@@ -59,6 +61,7 @@ export const App = () => {
     return (
         <div className="container">
             <h1>Lista de Notas</h1>
+            <h2>Tienes {notasTotal} notas en tu lista</h2>
             <NotasSearch
                 busca={busca}
                 setBusca={setBusca} />
